@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './TextAdventureGame.css';
 
 const TextAdventureGame = () => {
   const [scenario, setScenario] = useState({
@@ -59,7 +60,11 @@ const TextAdventureGame = () => {
     <div>
       <h2>{scenario.description1}</h2>
       <h1>{scenario.description2}</h1>
-      <img src={scenario.images[0]} alt="Scenario Image" style={{ maxWidth: '100%' }} />
+      <img
+        src={scenario.images[0]}
+        alt="Scenario Image"
+        className="scenario-image"
+      />
       <ul>
         {scenario.choices.map((choice, index) => (
           <li key={index}>
