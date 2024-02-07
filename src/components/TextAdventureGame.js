@@ -1,79 +1,59 @@
 import React, { useState } from 'react';
-import './TextAdventureGame.css';
+import Scene from './Scene';
 
 const TextAdventureGame = () => {
-  const [scenario, setScenario] = useState({
-    description1: 'Welcome to the most amazing, TOP-rated Escape Text-Based Adventure Game!',
-    description2: 'You find yourself locked in a VIRTUAL room, and it is bad; you have to escape the infamous C13 Dungeons',
-    choices: ['Open the door', 'Look out the window'],
-    images: ['/images/image1.jpg', '/images/landscape.jpg'],
-  });
+  const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
 
-  const handleChoice = (choice) => {
-    switch (choice) {
-      case 'Open the door':
-        setScenario({
-          description1: 'You open the door and find a key on the floor.',
-          choices: ['Pick up the key', 'Explore the room further'],
-          images: ['/images/image2.jpg', '/images/room.jpg'], 
-        });
-        break;
-      case 'Look out the window':
-        setScenario({
-          description1: 'You see a beautiful landscape outside.',
-          choices: ['Go back inside', 'Jump out the window'],
-          images: ['/images/image3.jpg', '/images/window.jpg'], 
-        });
-        break;
-      case 'Pick up the key':
-        setScenario({
-          description1: 'You now have the key in your inventory.',
-          choices: ['Explore the room further', 'Use the key on the locked chest'],
-          images: ['/images/image4.jpg', '/images/chest.jpg'], 
-        });
-        break;
-      case 'Explore the room further':
-        setScenario({
-          description1: 'You find a mysterious book on the shelf.',
-          choices: ['Read the book', 'Ignore the book'],
-          images: ['/images/image1.jpg', '/images/mysterious-book.jpg'], 
-        });
-        break;
-      case 'Use the key on the locked chest':
-        setScenario({
-          description1: 'The chest opens, revealing a treasure!',
-          choices: ['Celebrate your victory', 'Continue exploring'],
-          images: ['/images/image2.jpg', '/images/victory.jpg'], 
-        });
-        break;
-      // Add more cases for other choices and scenarios
-      default:
-        setScenario({
-          description1: 'You make a choice, but nothing interesting happens.',
-          choices: ['Try again'],
-          images: ['/images/default.jpg'], 
-        });
-    }
+  const handleChoice = (choiceIndex) => {
+    const nextSceneIndex = scenes[currentSceneIndex].choices[choiceIndex].nextSceneIndex;
+    setCurrentSceneIndex(nextSceneIndex);
   };
 
+  const currentScene = scenes[currentSceneIndex];
+
   return (
-    <div>
-      <h2>{scenario.description1}</h2>
-      <h1>{scenario.description2}</h1>
-      <img
-        src={scenario.images[0]}
-        alt="Scenario Image"
-        className="scenario-image"
-      />
-      <ul>
-        {scenario.choices.map((choice, index) => (
-          <li key={index}>
-            <button onClick={() => handleChoice(choice)}>{choice}</button>
-          </li>
-        ))}
-      </ul>
+    <div className="scene-container">
+      <h1>Room {Math.floor(currentSceneIndex / 5) + 1}</h1>
+      <Scene scene={currentScene} onChoice={handleChoice} />
     </div>
   );
 };
+
+
+const scenes = [
+  {
+    description: 'Scene 1 in Room 1 MAIN <br> "You stand in a peculiar room. Light filters in through the ceiling window. As you begin to survey your surroundings you attempt to recall what happened..."',
+    image: '/images/mainroom.jpg',
+    choices: [
+      { text: 'Choice 1 - "Examine the contents of the desk drawer."', nextSceneIndex: 1 },
+      { text: 'Choice 2 - "Carefully look under the couch for any hidden items or clues" ', nextSceneIndex: 3 },
+      { text: 'Choice 3 - "Take a nap, wait for a miracle."', nextSceneIndex: 2 },
+    ],
+  },
+  {
+    description: 'Scene 2 in Room 1 Watch <br> "A watch... hmmm, I bet this is somehow important."',
+    image: '/images/watch.jpg',
+    choices: [
+      { text: 'GO to Main Room', nextSceneIndex: 0 },
+      
+    ],
+  },
+  {
+    description: 'Scene 3 in Room 1 DEAD <br> "Still waiting to be found...."',
+    image: '/images/skeleton.jpg',
+    choices: [
+      { text: 'GO to Main Room', nextSceneIndex: 0 },
+      
+    ],
+  },
+  {
+    description: 'Scene 4 in Room 1 KEY <br> "FOUND IT! That was easy, let\'s get out of here."',
+    image: '/images/key.jpg',
+    choices: [
+      { text: 'GO to Main Room', nextSceneIndex: 0 },
+    ],
+  },
+];
+
 
 export default TextAdventureGame;
