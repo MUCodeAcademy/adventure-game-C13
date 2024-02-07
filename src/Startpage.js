@@ -15,7 +15,7 @@ function init() {
     scene = new THREE.Scene();
 
     // Load the panorama image
-    const loader = new THREE.TextureLoader();
+    const loader = new THREE.TextureLoader('https://images.app.goo.gl/ZK9sP7UMbahTET9P8');
     const texture = loader.load('https://images.app.goo.gl/ZK9sP7UMbahTET9P8');
 
     // Set the texture wrapping and flipping options
@@ -40,7 +40,7 @@ function init() {
     scene.add(mesh);
 
     // Create a new WebGL renderer object
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer('https://images.app.goo.gl/ZK9sP7UMbahTET9P8');
 
     // Set the renderer size to the window size
     renderer.setSize(window.innerWidth, window.innerHeight);
