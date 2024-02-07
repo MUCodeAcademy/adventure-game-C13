@@ -39,7 +39,7 @@ const scenes = [
     ],
   },
   {
-    description: 'Scene 3 in Room 1 DEAD',
+    description: 'Scene 3 in Room 1 DEAD <br> "Still waiting to be found...."',
     image: '/images/skeleton.jpg',
     choices: [
       { text: 'GO to Main Room', nextSceneIndex: 0 },
