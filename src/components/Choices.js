@@ -1,6 +1,6 @@
 // Choices.js
 import React from 'react';
-import './Choices.css'; // Assuming you have a separate CSS file for styling
+import './Choices.css';
 
 const Choices = ({ choices, onChoice }) => (
   <ul className="choices-container">

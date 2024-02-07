@@ -1,5 +1,7 @@
+// App.js
 import React from 'react';
 import TextAdventureGame from './components/TextAdventureGame';
+
 
 const App = () => {
   return (
