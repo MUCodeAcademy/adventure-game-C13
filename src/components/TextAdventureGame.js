@@ -22,7 +22,7 @@ const TextAdventureGame = () => {
 
 const scenes = [
   {
-    description: 'Scene 1 in Room 1 MAIN <br> "You awaken in a peculiar room. Light filters in through the ceiling window. As you begin to survey your surroundings, you attempt to recall what happened..."',
+    description: 'Scene 1 in Room 1 MAIN <br> "You stand in a peculiar room. Light filters in through the ceiling window. As you begin to survey your surroundings you attempt to recall what happened..."',
     image: '/images/mainroom.jpg',
     choices: [
       { text: 'Choice 1 - "Examine the contents of the desk drawer."', nextSceneIndex: 1 },
