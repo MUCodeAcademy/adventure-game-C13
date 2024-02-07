@@ -1,0 +1,26 @@
+import React from 'react';
+import {
+  AppRegistry,
+  Environment,
+  StyleSheet,
+  View,
+} from 'react-360';
+
+export default class PanoramicView extends React.Component {
+  componentDidMount() {
+    Environment.setBackgroundImage({ uri: 'https://images.app.goo.gl/jqsc3Us51jKviLjGA' });
+  }
+}
+
+const styles = StyleSheet.create({
+  panel: {
+    width: 1000,
+    height: 600,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+// Register the component
+AppRegistry.registerComponent('PanoramicView', () => PanoramicView);
