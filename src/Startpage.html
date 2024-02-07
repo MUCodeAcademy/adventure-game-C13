@@ -1,26 +1,40 @@
-import React from 'react';
-import {
-  AppRegistry,
-  Environment,
-  StyleSheet,
-  View,
-} from 'react 360';
+<!DOCTYPE html>
+<html>
 
-export default class PanoramicView extends React.Component {
-  componentDidMount() {
-    Environment.setBackgroundImage({ uri: 'https://images.app.goo.gl/jqsc3Us51jKviLjGA' });
-  }
-}
+<head>
+    <title>Panorama Example</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
 
-const styles = StyleSheet.create({
-  panel: {
-    width: 1000,
-    height: 600,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+        #panorama-container {
+            position: relative;
+            width: 1440px;
+            height: 650px;
+            margin: 0 auto;
+            overflow: hidden;
+            cursor: move;
+            /* fallback if grab cursor is unsupported */
+            cursor: grab;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+        }
 
-// Register the component
-AppRegistry.registerComponent('PanoramicView', () => PanoramicView);
+        #panorama-container:active {
+            cursor: grabbing;
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="panorama-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="panorama.js"></script>
+</body>
+
+</html>
