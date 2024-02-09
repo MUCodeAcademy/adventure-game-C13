@@ -1,7 +1,7 @@
 // TextAdventureGame.js
 import React, { useState, useEffect } from 'react';
 import Scene from './Scene';
-import GameOverPopup from './GameOverPopup';
+import GameOver from './GameOver';
 import './Health.css';
 
 const TextAdventureGame = () => {
@@ -9,7 +9,7 @@ const TextAdventureGame = () => {
   const [health, setHealth] = useState(50);
   const [gameOver, setGameOver] = useState(false);
 
-  const handleChoice = (choiceIndex,) => {
+  const handleChoice = (choiceIndex, damage) => {
     if (gameOver) return;
 
     const choice = scenes[currentSceneIndex].choices[choiceIndex];
@@ -37,12 +37,7 @@ const TextAdventureGame = () => {
 
   return (
     <div className="scene-container">
-      {/* Add an overlay when the game is over */}
-      {gameOver && (
-        <div className="overlay">
-          <GameOverPopup onRestart={restartGame} />
-        </div>
-      )}
+      {gameOver && <GameOver onRestart={restartGame} />}
 
       <h1>Room {Math.floor(currentSceneIndex / 5) + 1}</h1>
       <div className="health-container">
@@ -55,12 +50,12 @@ const TextAdventureGame = () => {
 
 const scenes = [
   {
-    description: 'Scene 1 in Room 1 MAIN <br> "You stand in a peculiar room... (your existing scene)',
+    description: 'Scene 1 in Room 1 MAIN <br> "You stand in a peculiar room... (your starting scene)',
     image: '/images/mainroom.jpg',
     choices: [
       { text: 'Choice 1 - "Examine the contents of the desk drawer."', nextSceneIndex: 1 },
       { text: 'Choice 2 - "Carefully look under the couch for any hidden items or clues" ', nextSceneIndex: 3 },
-      { text: 'Choice 3 - "Take a nap, wait for a miracle."', nextSceneIndex: 2, damage: 10 }, // deducts 10 health
+      { text: 'Choice 3 - "Take a nap, wait for a miracle. DAMAGE"', nextSceneIndex: 2, damage: 10 }, // deducts 10 health
     ],
   },
   {
