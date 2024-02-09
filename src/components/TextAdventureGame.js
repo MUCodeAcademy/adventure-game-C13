@@ -1,16 +1,27 @@
 // TextAdventureGame.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Scene from './Scene';
+import './Health.css';
 
-const TextAdventureGame = ({ onDamage }) => {
+const TextAdventureGame = () => {
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
+  const [health, setHealth] = useState(50); // Initialize health with 50
 
-  const handleChoice = (choiceIndex) => {
+  const [gameOver, setGameOver] = useState(false);
+
+  const handleChoice = (choiceIndex, damage) => {
+    if (gameOver) return; // Don't allow choices if the game is over
+
     const choice = scenes[currentSceneIndex].choices[choiceIndex];
     const nextSceneIndex = choice.nextSceneIndex;
 
-       if (choice.damage) {
-      onDamage(choice.damage);
+    if (choice.damage) {
+      const newHealth = Math.max(0, health - choice.damage);
+      setHealth(newHealth);
+
+      if (newHealth === 0) {
+        setGameOver(true);
+      }
     }
 
     setCurrentSceneIndex(nextSceneIndex);
@@ -18,9 +29,20 @@ const TextAdventureGame = ({ onDamage }) => {
 
   const currentScene = scenes[currentSceneIndex];
 
+  useEffect(() => {
+    if (gameOver) {
+      // Display the "GAME OVER" pop-up or perform other game-over actions
+      alert('GAME OVER');
+    }
+  }, [gameOver]);
+
+
   return (
     <div className="scene-container">
       <h1>Room {Math.floor(currentSceneIndex / 5) + 1}</h1>
+      <div className="health-container">
+        <h2 className={`health ${health <= 30 ? 'low-health' : ''}`}>Health: {health}</h2>
+      </div>
       <Scene scene={currentScene} onChoice={handleChoice} />
     </div>
   );
