@@ -1,6 +1,5 @@
 // Scene.js
 import React from 'react';
-import ScenarioDescription from './ScenarioDescription';
 import ScenarioImage from './ScenarioImage';
 import Choices from './Choices';
 import './Scene.css';

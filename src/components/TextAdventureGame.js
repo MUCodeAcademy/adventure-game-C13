@@ -1,11 +1,18 @@
+// TextAdventureGame.js
 import React, { useState } from 'react';
 import Scene from './Scene';
 
-const TextAdventureGame = () => {
+const TextAdventureGame = ({ onDamage }) => {
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
 
   const handleChoice = (choiceIndex) => {
-    const nextSceneIndex = scenes[currentSceneIndex].choices[choiceIndex].nextSceneIndex;
+    const choice = scenes[currentSceneIndex].choices[choiceIndex];
+    const nextSceneIndex = choice.nextSceneIndex;
+
+       if (choice.damage) {
+      onDamage(choice.damage);
+    }
+
     setCurrentSceneIndex(nextSceneIndex);
   };
 
@@ -19,15 +26,14 @@ const TextAdventureGame = () => {
   );
 };
 
-
 const scenes = [
   {
-    description: 'Scene 1 in Room 1 MAIN <br> "You stand in a peculiar room. Light filters in through the ceiling window. As you begin to survey your surroundings you attempt to recall what happened..."',
+    description: 'Scene 1 in Room 1 MAIN <br> "You stand in a peculiar room... (your existing scene)',
     image: '/images/mainroom.jpg',
     choices: [
       { text: 'Choice 1 - "Examine the contents of the desk drawer."', nextSceneIndex: 1 },
       { text: 'Choice 2 - "Carefully look under the couch for any hidden items or clues" ', nextSceneIndex: 3 },
-      { text: 'Choice 3 - "Take a nap, wait for a miracle."', nextSceneIndex: 2 },
+      { text: 'Choice 3 - "Take a nap, wait for a miracle."', nextSceneIndex: 2, damage: 10 }, // deducts 10 health
     ],
   },
   {

@@ -1,7 +1,6 @@
 // ScenarioImage.js
 import React from 'react';
-
-import './Scene.css';
+import './ScenarioImage.css';
 
 const ScenarioImage = ({ image, maxWidth, maxHeight }) => (
   <div className="image-container">
