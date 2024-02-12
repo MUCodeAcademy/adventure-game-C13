@@ -6,20 +6,24 @@
 
 body{
   font-family: "Rubik Doodle Shadow";
-  background-color: #333;
+  background-color: #353;
 }
 
 .logo {
-  width: auto;
-  height: auto;
+  width: 100px;
 }
-.header{
+header {
+  position: absolute;
+  z-index: 9999;
   width: 100%;
+  padding: 0.9rem 0;
+  top:0;
+  left: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 header nav {
-  background-color: red;
+  background-color: #353;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
@@ -41,4 +45,53 @@ header ul a {
   text-transform: uppercase;
   font-weight: 300;
   font-size: 0.83rem;
+}
+
+.hamburger {
+  padding-left: 1.5rem;
+}
+.hamburger a {
+  padding: 0;
+  width: 37px;
+  height: 37px;
+  display: flex;
+  border-radius: 50%;
+  background-color: rgba(115, 115, 115, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+}
+
+.hamburger .bar {
+  position: relative;
+  width: 52%;
+  height: 1.3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.hamburger .bar::before, 
+.hamburger .bar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 60%;
+  height: 100%;
+  background-color: inherit;
+  border-radius: 2px;
+}
+
+.hamburger .bar::before {
+  top: -4.5px;
+}
+
+.hamburger .bar::after{
+  top: 4.5px;
+}
+
+main {
+  background-color: #353;
+  height: 100vh;
 }
