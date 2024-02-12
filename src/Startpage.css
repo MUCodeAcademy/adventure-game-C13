@@ -10,7 +10,8 @@ body{
 }
 
 .logo {
-  width: 100px;
+  width: auto;
+  height: auto;
 }
 .header{
   width: 100%;
@@ -35,7 +36,7 @@ align-items: center;
 
 header ul a {
   text-decoration: none;
-  color: white
+  color: white;
   padding: 0 1.5rem;
   text-transform: uppercase;
   font-weight: 300;
