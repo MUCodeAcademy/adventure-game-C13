@@ -6,7 +6,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Escape C13, your future depends on it!</h2>
+      <h3>Escape C13, your future depends on it!</h3>
       <TextAdventureGame />
     </div>
   );
