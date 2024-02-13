@@ -21,9 +21,13 @@ const TextAdventureGame = () => {
     const choice = scenes[currentSceneIndex].choices[choiceIndex];
     const nextSceneIndex = choice.nextSceneIndex;
   
-    // Check if the choice has an item and add it to the inventory
+    // checking if the choice has an item and add it to the inventory
     if (choice.item) {
-      addToInventory(choice.item);
+      if (choice.item === 'Key' && inventory.includes('Key')) {      
+        alert('You already have the Key!'); // message indicating that the key is already in the inventory
+      } else {
+        addToInventory(choice.item);
+      }
     }
   
     if (choice.damage) {
@@ -37,11 +41,12 @@ const TextAdventureGame = () => {
   
     setCurrentSceneIndex(nextSceneIndex);
   };
-
+     
   const restartGame = () => {
     setHealth(50);
     setGameOver(false);
     setCurrentSceneIndex(0);
+    setInventory([]);
   };
 
   const currentScene = scenes[currentSceneIndex];
