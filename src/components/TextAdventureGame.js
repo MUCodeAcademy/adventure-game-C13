@@ -100,7 +100,7 @@ const scenes = [
     image: '/images/key.jpg',
     choices: [
       { text: 'GO to Main Room', nextSceneIndex: 0 },
-      { text: 'Take the KEY',nextSceneIndex: 2, item: 'Key'},
+      { text: 'Take the KEY',nextSceneIndex: 3, item: 'Key'},
     ],
   },
 ];
