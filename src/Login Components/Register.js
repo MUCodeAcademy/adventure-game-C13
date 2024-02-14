@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import './Register.css';
+import './Login.css';
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -19,26 +19,25 @@ return (
         <form onSubmit={handleSubmit}>
             <h1>Register</h1>
             <div className="input-box">
-                <input type="text" value={username} placeholder="Username" required/>
+                <input type="text" value= {username} onChange={(e) => setUsername(e.target.value)} id="username"placeholder="Username" required/>
                 <FontAwesomeIcon className="icon" icon={faUser} />
             </div>
             <div className="input-box">
-                <input type="text" value= {email} placeholder="Email Address" required/>
-                <FontAwesomeIcon icon={faEnvelope} />
+                <input type="text" value= {email} name="email" onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Email Address" required/>
+                <FontAwesomeIcon className="icon" icon={faEnvelope} />
             </div>
             <div className="input-box">
-                <input type="password" value= {pwd} placeholder="Password" required/>
+                <input type="password" value= {pwd} name="password" onChange={(e) => setPwd(e.target.value)} id="password" placeholder="Password" required/>
                 <FontAwesomeIcon className="icon" icon={faLock} />
             </div>
 
-            <button type="submit">Register Account</button>
+            <button type="submit" onSubmit={handleSubmit}>Register Account</button>
+            {/* how to handle "onsubmit"? */}
             <div className="register-link">
                 <p>Already registered? <a>Log in</a></p>
             </div>
         </form>
         </div>
-<p>Already have an account? <a>Login</a></p>
-
 </div>
 )
 };
