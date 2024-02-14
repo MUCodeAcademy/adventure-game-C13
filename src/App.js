@@ -1,7 +1,7 @@
 // App.js
 import React, { useState } from 'react';
 import TextAdventureGame from './components/TextAdventureGame';
-import ChatRoom from './components/ChatRoom';
+import ChatRoom from './ChatRoom';
 
 const App = () => {
   return (
@@ -9,11 +9,9 @@ const App = () => {
       <h3>Escape C13, your future depends on it!</h3>
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
-          <TextAdventureGame />
-        </div>
-        <div style={{ flex: 1 }}>
           <ChatRoom />
-        </div>
+          <TextAdventureGame />
+        </div>      
       </div>
     </div>
   );
