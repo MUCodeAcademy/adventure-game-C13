@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import './Login.css';
+import './Login-Register.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-
+import { useUserContext } from "./UserContext";
 
 const Login = (props) => {
     const [username, setUsername] = useState("");
     const [pwd, setPwd] = useState("");
+    const { setUser } = useUserContext();
 
     const handleSubmit = (e) => {
         e.preventDefault();
