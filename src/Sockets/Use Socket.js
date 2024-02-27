@@ -20,8 +20,12 @@ const useSocketHook = () => {
         }
     }, []);
 
-    const tallyVote = (tally) => {
-        socketRef.current.emit('cast vote', tally)
+    const sendCounter2 = (voteTwo) => {
+        socketRef.current.emit('cast vote', voteTwo)
+    }
+
+    const sendCounter1 = (voteOne) => {
+        socketRef.current.emit('cast vote', voteOne)
     }
 
     return { response, tallyVote }

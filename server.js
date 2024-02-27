@@ -7,8 +7,12 @@ io.on("connection", (socket) => {
 
     
 
-    Socket.on("cast vote", (vote) => {
-        io.emit("player has casted vote", vote);
+    Socket.on("cast vote to 1", (voteOne) => {
+        io.emit("player has casted vote", voteOne);
+    });
+
+    Socket.on("cast vote to 2", (voteTwo) => {
+        io.emit("player has casted vote", voteTwo);
     });
 
     socket.on("disconnect", () =>{
