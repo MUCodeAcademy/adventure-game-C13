@@ -5,6 +5,7 @@ const useSocketHook = () => {
     const [response, setResponse] = useState([]);
     const [startTimer, setStartTimer] = useState(false);
     const [counter, setCounter] = useState(10);
+    const [handleVote, setHandleVote] = useState(false);
 
     const socketRef = useRef();
 
@@ -32,7 +33,14 @@ const useSocketHook = () => {
     const sendCounter = (vote, username) => {
         socketRef.current.emit('cast vote', vote, username);
         setStartTimer(true);
-    }
+    };
+     const VoteHandler = () => {
+        if ( = 0) {
+            setHandleVote(true)
+        };
+        else if () {
+        };
+     };
 
     return { response, startTimer, counter, sendCounter }
 };
