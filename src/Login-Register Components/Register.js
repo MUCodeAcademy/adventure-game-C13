@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import './Login.css';
+import './Login-Register.css';
 
 const Register = () => {
     const [email, setEmail] = useState("");
