@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Timer from '../Sockets/Timer Function';
 import VoteHandler from '../Sockets/VoteHandler Function';
+import useSocketHook from '../Sockets/useSocket';
+import { useEffect } from 'react';
 
 const TextAdventureGame = () => {
   const [scenario, setScenario] = useState({
@@ -11,15 +13,24 @@ const TextAdventureGame = () => {
     images: ['/images/image1.jpg', '/images/landscape.jpg'],
   });
 
+  let username = "Justin";
+
+  const { response, startTimer, counter, sendCounter } = useSocketHook();
+
   const handleChoice = (choice) => {
     switch (choice) {
       case 'Open the door':
-        setScenario({
-          description1: 'You open the door and find a key on the floor.',
-          choice1: ['Pick up the key'],
-          choice2: ['Explore the room further'],
-          images: ['/images/image2.jpg', '/images/room.jpg'], 
-        });
+        sendCounter(choice, username);
+        if (counter == 10 ) {
+          break;
+        } else {
+          setScenario({
+            description1: 'You open the door and find a key on the floor.',
+            choice1: ['Pick up the key'],
+            choice2: ['Explore the room further'],
+            images: ['/images/image2.jpg', '/images/room.jpg'], 
+          });
+        }
         break;
       case 'Look out the window':
         setScenario({
@@ -65,6 +76,9 @@ const TextAdventureGame = () => {
 
   return (
     <div>
+      {counter > 0 &&
+        <h1>{counter}</h1>
+      }
       <h2>{scenario.description1}</h2>
       <h1>{scenario.description2}</h1>
       <img src={scenario.images[0]} alt="Scenario Image" style={{ maxWidth: '100%' }} />

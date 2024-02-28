@@ -1,13 +1,14 @@
-import { useState } from "react";
+// import { useState, useEffect } from "react";
 
-function VoteHandler() {
-    const[handlVote, setHandleVote] = useState(false);
+// function VoteHandler() {
+//     const[handleVote, setHandleVote] = useState(false);
 
-    useEffect (()=>{
-         if(voteOne > voteTwo) {
-        handleChoice}
-    });
+//     useEffect (()=>{
+//         if(voteOne > voteTwo) {
+//           setHandleVote(voteOne);
+//         }
+//     });
   
-  };
+//   };
 
-  export default VoteHandler;
+//   export default VoteHandler;

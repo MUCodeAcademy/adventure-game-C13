@@ -4,8 +4,8 @@ import useSocketHook from "./Use Socket";
 import Timer from "./Timer Function";
 
  function Vote() {
-    const [placeVoteOne, setPlaceVoteOne] =useState(0);
-    const [placeVoteTwo, setPlaceVoteTwo] =useState(0);
+    const [placeVoteOne, setPlaceVoteOne] = useState(0);
+    const [placeVoteTwo, setPlaceVoteTwo] = useState(0);
 
     const voteOne = () => {
       setPlaceVoteOne(placeVoteOne + 1)
@@ -14,7 +14,7 @@ import Timer from "./Timer Function";
     const voteTwo = () => {
       setPlaceVoteTwo(placeVoteTwo + 1)
     };
-    if(voteOne || voteTwo >= 1){
+    if(placeVoteOne >= 1 || placeVoteTwo >= 1){
       setStartCounter(true)
     };
 
