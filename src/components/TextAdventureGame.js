@@ -18,26 +18,29 @@ const TextAdventureGame = () => {
 
   let username = "Justin";
 
-  const { response, startTimer, counter, sendCounter } = useSocketHook();
+  const { response, startTimer, counter, sendCounter, handleVote } = useSocketHook();
 
-  const handleChoice = (choice) => {
-    setVoted(true)
+  useEffect (()=>{
+    if (counter <= 0) {
+      nextScene(handleVote)
+      setVoted(false)
+      sendCounter(0, username)
+      
+    }
+  },[counter]);
+
+
+  const nextScene = (choice) => {
     switch (choice) {
-      case 'Open the door':
-        sendCounter(1, username);
-        if (counter == 10 ) {
-          break;
-        } else {
+      case 1:
           setScenario({
             description1: 'You open the door and find a key on the floor.',
             choice1: ['Pick up the key'],
             choice2: ['Explore the room further'],
             images: ['/images/image2.jpg', '/images/room.jpg'], 
           });
-        }
         break;
-      case 'Look out the window':
-        sendCounter(2,username);
+      case 2:
         setScenario({
           description1: 'You see a beautiful landscape outside.',
           choice1: ['Go back inside'],
@@ -45,8 +48,7 @@ const TextAdventureGame = () => {
           images: ['/images/image3.jpg', '/images/window.jpg'], 
         });
         break;
-      case 'Pick up the key':
-        sendCounter(1,username);
+      case 3:
         setScenario({
           description1: 'You now have the key in your inventory.',
           choice1: ['Explore the room further'],
@@ -54,8 +56,7 @@ const TextAdventureGame = () => {
           images: ['/images/image4.jpg', '/images/chest.jpg'], 
         });
         break;
-      case 'Explore the room further':
-        sendCounter(2,username);
+      case 4:
         setScenario({
           description1: 'You find a mysterious book on the shelf.',
           choice1: ['Read the book'],
@@ -63,8 +64,7 @@ const TextAdventureGame = () => {
           images: ['/images/image1.jpg', '/images/mysterious-book.jpg'], 
         });
         break;
-      case 'Use the key on the locked chest':
-        sendCounter(1,username);
+      case 5:
         setScenario({
           description1: 'The chest opens, revealing a treasure!',
           choice1: ['Celebrate your victory'],
@@ -73,6 +73,34 @@ const TextAdventureGame = () => {
         });
         break;
       // Add more cases for other choices and scenarios
+      default:
+        setScenario({
+          description1: 'You make a choice, but nothing interesting happens.',
+          choice1: ['Try again'],
+          images: ['/images/default.jpg'], 
+        });
+    }
+  };
+
+  const handleChoice = (choice) => {
+    setVoted(true)
+    switch (choice) {
+      case 'Open the door':
+        sendCounter(1, username);
+        
+        break;
+      case 'Look out the window':
+        sendCounter(2,username);
+        break;
+      case 'Pick up the key':
+        sendCounter(3,username);
+        break;
+      case 'Explore the room further':
+        sendCounter(4,username);
+        break;
+      case 'Use the key on the locked chest':
+        sendCounter(5,username);;
+        break;
       default:
         setScenario({
           description1: 'You make a choice, but nothing interesting happens.',
@@ -96,7 +124,7 @@ const TextAdventureGame = () => {
             <button disabled ={Voted} onClick={() => handleChoice(choice)}>{choice}</button>
             {response.length !== 0 && 
             response.map((item, index) => (
-              <h1>{item.one}</h1>  
+              <h1>{item.vOne}</h1>  
             ))
         }
           </li>
@@ -106,7 +134,7 @@ const TextAdventureGame = () => {
             <button disabled ={Voted} onClick={() => handleChoice(choice)}>{choice}</button>
             {response.length !== 0 && 
             response.map((item, index) => (
-              <h1>{item.two}</h1>  
+              <h1>{item.vTwo}</h1>  
             ))
         }
           </li>
