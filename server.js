@@ -9,6 +9,17 @@ const io = require('socket.io')(server, {
     }
 });
 
+let voteCounterTwo = 0;
+let voteCounterOne = 0;
+
+  const voteOne = () => {
+    voteCounterOne ++
+  };
+
+  const voteTwo = () => {
+    voteCounterTwo ++
+  };
+
 let counter = 10;
 let timerInterval;
 
@@ -27,7 +38,13 @@ io.on("connection", (socket) => {
     console.log("Player Connected");
 
     socket.on("cast vote", (vote, username) => {
-        io.emit("cast vote", {vote: vote, username: username});
+      if (vote==1) {
+        voteOne();
+      }
+      else if (vote==2) {
+        voteTwo();
+      };
+        io.emit("cast vote", {one: voteCounterOne, two: voteCounterTwo, username: username});
         console.log("casted vote: ", vote, username);
         if (!timerInterval) {
             startTimer();

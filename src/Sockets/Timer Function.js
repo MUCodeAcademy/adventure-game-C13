@@ -18,4 +18,4 @@ function Timer() {
     };
   };
 
-  export default Timer;
+  export default Timer;   

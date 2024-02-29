@@ -13,14 +13,18 @@ const TextAdventureGame = () => {
     images: ['/images/image1.jpg', '/images/landscape.jpg'],
   });
 
+  const [Voted, setVoted] = useState(false);
+  
+
   let username = "Justin";
 
   const { response, startTimer, counter, sendCounter } = useSocketHook();
 
   const handleChoice = (choice) => {
+    setVoted(true)
     switch (choice) {
       case 'Open the door':
-        sendCounter(choice, username);
+        sendCounter(1, username);
         if (counter == 10 ) {
           break;
         } else {
@@ -33,6 +37,7 @@ const TextAdventureGame = () => {
         }
         break;
       case 'Look out the window':
+        sendCounter(2,username);
         setScenario({
           description1: 'You see a beautiful landscape outside.',
           choice1: ['Go back inside'],
@@ -41,6 +46,7 @@ const TextAdventureGame = () => {
         });
         break;
       case 'Pick up the key':
+        sendCounter(1,username);
         setScenario({
           description1: 'You now have the key in your inventory.',
           choice1: ['Explore the room further'],
@@ -49,6 +55,7 @@ const TextAdventureGame = () => {
         });
         break;
       case 'Explore the room further':
+        sendCounter(2,username);
         setScenario({
           description1: 'You find a mysterious book on the shelf.',
           choice1: ['Read the book'],
@@ -57,6 +64,7 @@ const TextAdventureGame = () => {
         });
         break;
       case 'Use the key on the locked chest':
+        sendCounter(1,username);
         setScenario({
           description1: 'The chest opens, revealing a treasure!',
           choice1: ['Celebrate your victory'],
@@ -85,12 +93,22 @@ const TextAdventureGame = () => {
       <ul>
         {scenario.choice1.map((choice, index) => (
           <li key={index}>
-            <button onClick={() => handleChoice(choice)}>{choice}</button>
+            <button disabled ={Voted} onClick={() => handleChoice(choice)}>{choice}</button>
+            {response.length !== 0 && 
+            response.map((item, index) => (
+              <h1>{item.one}</h1>  
+            ))
+        }
           </li>
         ))}
         {scenario.choice2.map((choice, index) => (
           <li key={index}>
-            <button onClick={() => handleChoice(choice)}>{choice}</button>
+            <button disabled ={Voted} onClick={() => handleChoice(choice)}>{choice}</button>
+            {response.length !== 0 && 
+            response.map((item, index) => (
+              <h1>{item.two}</h1>  
+            ))
+        }
           </li>
         ))}
       </ul>
