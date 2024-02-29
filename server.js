@@ -64,15 +64,15 @@ io.on("connection", (socket) => {
       }
       else if (vote==4 ) {
         votefour();
-      }
+      } 
       else if (vote==0) {
         voteCounterOne=0;
         voteCounterTwo=0;
         voteCounterThree=0;
         voteCounterFour=0;
         voteCounterFive=0;
-        timerInterval=null;
-        counter=30
+        startTimer(false);
+        counter=30;
       }
         io.emit("cast vote", {vOne: voteCounterOne, vThree: voteCounterThree, vFive: voteCounterFive,  vTwo: voteCounterTwo, vFour: voteCounterFour, username: username});
         console.log("casted vote: ", vote, username);
