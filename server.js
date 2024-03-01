@@ -32,8 +32,9 @@ let voteCounterFive = 0;
     voteCounterTwo ++
   };
 
-let counter = 30;
+let counter = 10;
 let timerInterval;
+let timerGoing = false;
 
 function startTimer() {
     timerInterval = setInterval(() => {
@@ -50,6 +51,7 @@ io.on("connection", (socket) => {
     console.log("Player Connected");
 
     socket.on("cast vote", (vote, username) => {
+      timerGoing = true;
       if (vote==1) {
         voteOne();
       }
@@ -71,12 +73,13 @@ io.on("connection", (socket) => {
         voteCounterThree=0;
         voteCounterFour=0;
         voteCounterFive=0;
-        startTimer(false);
-        counter=30;
+        counter=10;
+        timerGoing = false;
       }
-        io.emit("cast vote", {vOne: voteCounterOne, vThree: voteCounterThree, vFive: voteCounterFive,  vTwo: voteCounterTwo, vFour: voteCounterFour, username: username});
+        io.emit("calculate vote", {vOne: voteCounterOne, vThree: voteCounterThree, vFive: voteCounterFive,  vTwo: voteCounterTwo, vFour: voteCounterFour, username: username});
         console.log("casted vote: ", vote, username);
-        if (!timerInterval) {
+        io.emit("cast vote", {})
+        if (timerGoing) {
             startTimer();
         }
     });

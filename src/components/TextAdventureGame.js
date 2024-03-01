@@ -22,10 +22,9 @@ const TextAdventureGame = () => {
 
   useEffect (()=>{
     if (counter <= 0) {
-      nextScene(handleVote)
-      setVoted(false)
-      sendCounter(0, username)
-      
+        nextScene(handleVote)
+        setVoted(false)
+        sendCounter(0, username)
     }
   },[counter]);
 
@@ -87,7 +86,6 @@ const TextAdventureGame = () => {
     switch (choice) {
       case 'Open the door':
         sendCounter(1, username);
-        
         break;
       case 'Look out the window':
         sendCounter(2,username);
